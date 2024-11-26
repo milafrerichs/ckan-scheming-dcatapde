@@ -1,0 +1,871 @@
+scheming_version: 2
+dataset_type: dataset
+about: Combined DCAT-APde and DCAT-AP 3.0 schema
+about_url: https://github.com/milafrerichs/ckan-scheming-dcatapde
+
+dataset_fields:
+
+- field_name: title
+  label:
+    en: Title
+    de: Titel
+  preset: title
+  required: true
+  help_text:
+    en: A descriptive title for the dataset.
+    de: Ein prägnanter und aussagekräftiger Titel für den Datensatz.
+
+- field_name: name
+  label: URL
+  preset: dataset_slug
+  help_text:
+    en: A URL-friendly name for the dataset. Used in URLs and should only contain lowercase letters, numbers, and hyphens.
+    de: Ein URL-freundlicher Name für den Datensatz. Wird in URLs verwendet und sollte nur Kleinbuchstaben, Zahlen und Bindestriche enthalten.
+  form_placeholder: eg. my-dataset
+
+- field_name: notes
+  label:
+    en: Description
+    de: Beschreibung
+  help_text:
+    en: A detailed description of the dataset. Can contain Markdown formatting.
+    de: Eine ausführliche Beschreibung des Datensatzes. Kann Markdown zur Formatierung enthalten.
+  required: true
+  preset: markdown
+
+- field_name: tag_string
+  label:
+    en: Keywords
+    de: Schlagwörter
+  preset: tag_string_autocomplete
+  form_placeholder: eg. economy, mental health, government
+  help_text:
+    en: Words or phrases to describe and categorize the dataset. Separate multiple tags with commas.
+    de: Wörter oder Phrasen zur Beschreibung und Kategorisierung des Datensatzes. Mehrere Schlagwörter durch Kommas trennen.
+
+- field_name: license_id
+  label:
+    en: License
+    de: Lizenz
+  form_snippet: license.html
+  help_text:
+    en: The license under which the dataset is published.
+    de: Die Lizenz, unter der der Datensatz veröffentlicht wird.
+
+- field_name: owner_org
+  label:
+    en: Organization
+    de: Organisation
+  preset: dataset_organization
+  help_text:
+    en: The organization to which the dataset is assigned in CKAN.
+    de: Die Organisation, der der Datensatz in CKAN zugeordnet ist.
+
+- field_name: contact
+  label:
+    en: Contact points
+    de: Kontaktstelle
+  help_text:
+    en: Contact information for inquiries regarding the dataset.
+    de: Kontaktinformationen für Anfragen bezüglich des Datensatzes.
+  repeating_label: Contact point
+  repeating_subfields:
+
+    - field_name: uri
+      label: URI
+
+    - field_name: name
+      label: Name
+
+    - field_name: identifier
+      label: Identifier
+
+    - field_name: email
+      label: Email
+      display_snippet: email.html
+
+- field_name: publisher
+  label:
+    en: Publisher
+    de: Herausgeber (Publisher)
+  help_text:
+    en: The organization or person responsible for publishing the dataset.
+    de: Die für die Veröffentlichung des Datensatzes verantwortliche Organisation oder Person.
+  repeating_label: Publisher
+  repeating_once: true
+  repeating_subfields:
+
+    - field_name: uri
+      label: URI
+
+    - field_name: name
+      label: Name
+
+    - field_name: email
+      label: Email
+      display_snippet: email.html
+
+    - field_name: url
+      label: URL
+      display_snippet: link.html
+
+    - field_name: type
+      label: Type
+
+    - field_name: identifier
+      label: Identifier
+      help_text: Unique identifier for the publisher, such as a ROR ID.
+
+- field_name: politicalGeocodingLevelURI
+  display_property: dcatde:politicalGeocodingLevelURI
+  label:
+    en: Political Geocoding Level URI
+    de: URI der politisch-geografischen Ebene
+  help_text:
+    en: URI representing the political geocoding level of the dataset (e.g., municipal, state, federal).
+    de: URI zur Angabe der politisch-geografischen Ebene des Datensatzes (z.B. Kommune, Bundesland, Bund).
+  preset: select
+  choices:
+    - value: "http://dcat-ap.de/def/politicalGeocoding/Level/international"
+      label: "internationale Ebene"
+    - value: "http://dcat-ap.de/def/politicalGeocoding/Level/european"
+      label: "EU-Ebene"
+    - value: "http://dcat-ap.de/def/politicalGeocoding/Level/federal"
+      label: "Bundesebene"
+    - value: "http://dcat-ap.de/def/politicalGeocoding/Level/state"
+      label: "Ebene der Bundesländer"
+    - value: "http://dcat-ap.de/def/politicalGeocoding/Level/administrativeDistrict"
+      label: "Ebene der Landkreise und Regierungsbezirke"
+    - value: "http://dcat-ap.de/def/politicalGeocoding/Level/municipality"
+      label: "kommunale Ebene"
+
+- field_name: politicalGeocodingURI
+  display_property: dcatde:politicalGeocodingURI
+  label:
+    en: Political Geocoding URI
+    de: URI der politisch-geografischen Zuordnung
+  help_text:
+    en: URI representing the specific political geocoding of the dataset.
+    de: URI zur genauen Angabe der politisch-geografischen Zuordnung des Datensatzes.
+
+
+- field_name: theme
+  display_property: dcat:theme
+  label:
+    en: Theme
+    de: Thema
+  help_text:
+    en: Main themes or categories the dataset belongs to.
+    de: Hauptthemen oder -kategorien, denen der Datensatz zugeordnet ist.
+  preset: multiple_select_ignore_missing
+  choices:
+    - value: "http://publications.europa.eu/resource/authority/data-theme/AGRI"
+      label:
+        en: "Agriculture, fisheries, forestry and food"
+        de: "Landwirtschaft, Fischerei, Forstwirtschaft und Nahrungsmittel"
+    - value: "http://publications.europa.eu/resource/authority/data-theme/ECON"
+      label:
+        en: "Economy and finance"
+        de: "Wirtschaft und Finanzen"
+    - value: "http://publications.europa.eu/resource/authority/data-theme/EDUC"
+      label:
+        en: "Education, culture and sport"
+        de: "Bildung, Kultur und Sport"
+    - value: "http://publications.europa.eu/resource/authority/data-theme/ENVI"
+      label:
+        en: "Environment"
+        de: "Umwelt"
+    - value: "http://publications.europa.eu/resource/authority/data-theme/GOVE"
+      label:
+        en: "Government and public sector"
+        de: "Regierung und öffentlicher Sektor"
+    - value: "http://publications.europa.eu/resource/authority/data-theme/HEAL"
+      label:
+        en: "Health"
+        de: "Gesundheit"
+    - value: "http://publications.europa.eu/resource/authority/data-theme/INTR"
+      label:
+        en: "International issues"
+        de: "Internationale Themen"
+    - value: "http://publications.europa.eu/resource/authority/data-theme/JUST"
+      label:
+        en: "Justice, legal system and public safety"
+        de: "Justiz, Rechtssystem und öffentliche Sicherheit"
+    - value: "http://publications.europa.eu/resource/authority/data-theme/REGI"
+      label:
+        en: "Regions and cities"
+        de: "Regionen und Städte"
+    - value: "http://publications.europa.eu/resource/authority/data-theme/SOCI"
+      label:
+        en: "Population and society"
+        de: "Bevölkerung und Gesellschaft"
+    - value: "http://publications.europa.eu/resource/authority/data-theme/TECH"
+      label:
+        en: "Science and technology"
+        de: "Wissenschaft und Technologie"
+    - value: "http://publications.europa.eu/resource/authority/data-theme/TRAN"
+      label:
+        en: "Transport"
+        de: "Verkehr"
+
+- field_name: availability
+  label:
+    en: Availability
+    de: Verfügbarkeit
+  preset: select
+  display_property: dcatap:availability
+  help_text:
+    en: Information about the planned availability of the dataset.
+    de: Information über die geplante Verfügbarkeit des Datensatzes.
+
+  choices:
+    - label:
+        en: Available
+        de: Verfügbar
+      value: http://publications.europa.eu/resource/authority/planned-availability/AVAILABLE
+    - label:
+        en: Experimental
+        de: Experimentell
+      value: http://publications.europa.eu/resource/authority/planned-availability/EXPERIMENTAL
+    - label:
+        en: Stable
+        de: Stabil
+      value: http://publications.europa.eu/resource/authority/planned-availability/STABLE
+    - label:
+        en: Temporary
+        de: Temporär
+      value: http://publications.europa.eu/resource/authority/planned-availability/TEMPORARY
+
+- field_name: temporal
+  display_property: dcterms:temporal
+  label:
+    en: Temporal Coverage
+    de: Zeitliche Abdeckung
+  help_text:
+    en: The temporal period that the dataset covers.
+    de: Ein Zeitintervall, welches durch Start- und Endzeitpunkt bezeichnet bzw. definiert ist.
+  repeating_subfields:
+
+    - field_name: start
+      display_property: dcat:startDate
+      preset: date
+      label:
+        en: Start Date
+        de: Startdatum
+
+    - field_name: start
+      preset: date
+      display_property: dcat:endDate
+      label:
+        en: End Date
+        de: Enddatum
+
+- field_name: spatial
+  alternative_field_name: spatial_coverage
+  display_property: dcterms:spatial
+  label:
+    en: Spatial Coverage
+    de: Räumliche Abdeckung
+  help_text:
+    en: The temporal period that the dataset covers.
+    de: Ein Zeitintervall, welches durch Start- und Endzeitpunkt bezeichnet bzw. definiert ist.
+  repeating_subfields:
+
+    - field_name: uri
+      label: URI
+
+    - field_name: text
+      label: Label
+
+    - field_name: geom
+      label: Geometry
+
+    - field_name: bbox
+      label: Bounding Box
+
+    - field_name: centroid
+      label: Centroid
+
+- field_name: url
+  label:
+    en: Landing page
+    de: Webseite
+  help_text:
+    en: URL of a web page with further information about the dataset.
+    de: URL einer Webseite mit weiteren Informationen zum Datensatz.
+
+- field_name: contributor_id
+  display_property: dcatde:contributorID
+  label: Contributor ID
+  help_text:
+    en: A unique identifier for the person or organization that contributed to creating or maintaining the dataset.
+    de: Eine eindeutige Kennung für die Person oder Organisation, die zur Erstellung oder Pflege des Datensatzes beigetragen hat.
+
+- field_name: issued
+  label:
+    en: Release date
+    de: Veröffentlichungsdatum
+  preset: datetime
+  help_text:
+    en: Date of first publication of the dataset.
+    de: Datum der ersten Veröffentlichung des Datensatzes.
+
+- field_name: modified
+  label:
+    en: Modification date
+    de: Änderungsdatum
+  preset: datetime
+  help_text:
+    en: Date of the last change or update to the dataset.
+    de: Datum der letzten Änderung oder Aktualisierung des Datensatzes.
+
+- field_name: version
+  display_property: dcat:version
+  label:
+    en: Version
+    de: Version
+  validators: ignore_missing unicode_safe
+  help_text:
+    en: The version number or designation of the dataset.
+    de: Die Versionsnummer oder -bezeichnung des Datensatzes.
+
+- field_name: version_notes
+  display_property: adms:versionNotes
+  label:
+    en: Version notes
+    de: Versionshinweise
+  preset: markdown
+  help_text:
+    en: Notes about changes in this version of the dataset.
+    de: Anmerkungen zu Änderungen in dieser Version des Datensatzes.
+
+- field_name: identifier
+  label:
+    en: Identifier
+    de: Kennung
+  help_text:
+    en: A unique, unchangeable identifier for the dataset.
+    de: Eine eindeutige, unveränderliche Kennung für den Datensatz.
+
+- field_name: alternative_identifier
+  display_property: adms:identifier
+  label:
+    en: Alternative identifier
+    de: Alternative Kennung
+  help_text:
+    en: Alternative identifiers for the dataset, e.g., DOI or ISBN.
+    de: Alternative Kennungen für den Datensatz, z.B. DOI oder ISBN.
+  preset: multiple_text
+
+- field_name: frequency
+  display_property: dcterms:accrualPeriodicity
+  label:
+    en: Frequency
+    de: Aktualisierungshäufigkeit
+  help_text:
+    en: The frequency with which the dataset is updated.
+    de: Die Häufigkeit, mit der der Datensatz aktualisiert wird.
+  preset: select
+  choices:
+    - label:
+        en: Annual
+        de: jährlich
+      value: http://publications.europa.eu/resource/authority/frequency/ANNUAL
+    - label:
+        en: Monthly
+        de: monatlich
+      value: http://publications.europa.eu/resource/authority/frequency/MONTHLY
+    - label:
+        en: Weekly
+        de: wöchentlich
+      value: http://publications.europa.eu/resource/authority/frequency/WEEKLY
+    - label:
+        en: Daily
+        de: täglich
+      value: http://publications.europa.eu/resource/authority/frequency/DAILY
+    - label:
+        en: Continuous
+        de: kontinuierlich
+      value: http://publications.europa.eu/resource/authority/frequency/CONT
+
+- field_name: provenance
+  display_property: dcterms:provenance
+  label:
+    en: Provenance
+    de: Herkunft
+  help_text:
+    en: Information about the origin and history of the dataset.
+    de: Informationen zur Herkunft und Entstehungsgeschichte des Datensatzes.
+  preset: markdown
+
+- field_name: quality_process_uri
+  display_property: dcatde:qualityProcessURI
+  label:
+    en: Quality Process URI
+    de: URI des Qualitätsprozesses
+  help_text:
+    en: URI referring to information about the quality assurance process of the dataset.
+    de: URI, die auf Informationen zum Qualitätssicherungsprozess des Datensatzes verweist.
+
+- field_name: temporal_resolution
+  display_property: dcat:temporalResolution
+  label:
+    en: Temporal resolution #TODO: type
+    de: Zeitliche Auflösung
+  help_text:
+    en: The temporal resolution of the data contained in the dataset.
+    de: Die zeitliche Auflösung der im Datensatz enthaltenen Daten.
+
+- field_name: geocoding_description
+  display_property: dcatde:geocodingDescription
+  preset: markdown
+  label:
+    en: Geocoding Description
+    de: Geocodierung-Beschreibung
+  help_text:
+    en: Description of the geocoding or geographic referencing used.
+    de: Beschreibung der verwendeten Geocodierung oder geografischen Referenzierung.
+
+- field_name: spatial_resolution_in_meters
+  display_property: dcat:spatialResolutionInMeters
+  validators: ignore_missing int_validator
+  label:
+    en: Spatial resolution in meters
+    de: Räumliche Auflösung in Metern
+  help_text:
+    en: The spatial resolution of the data in meters, if applicable.
+    de: Die räumliche Auflösung der Daten in Metern, falls zutreffend.
+
+- field_name: access_rights
+  display_property: dcterms:accessRights
+  preset: markdown
+  label:
+    en: Access rights
+    de: Zugangsrechte
+  help_text:
+    en: Information about access rights and restrictions for the dataset.
+    de: Informationen zu Zugangsrechten und -beschränkungen für den Datensatz.
+
+- field_name: conforms_to
+  display_property: dcterms:conformsTo
+  label:
+    en: Conforms to
+    de: Konform zu
+  help_text:
+    en: Standards or specifications to which the dataset conforms.
+    de: Standards oder Spezifikationen, denen der Datensatz entspricht.
+  preset: multiple_text
+
+- field_name: legal_basis
+  display_property: dcatde:legalBasis
+  preset: markdown
+  label:
+    en: Legal Basis
+    de: Rechtsgrundlage
+  help_text:
+    en: Legal basis for collecting or publishing the data.
+    de: Rechtliche Grundlage für die Erhebung oder Veröffentlichung der Daten.
+
+- field_name: language
+  display_property: dcterms:language
+  label:
+    en: Language
+    de: Sprache
+  help_text:
+    en: The language(s) in which the dataset is available.
+    de: Die Sprache(n), in der/denen der Datensatz verfügbar ist.
+  preset: multiple_select_ignore_missing
+  choices:
+    - value: http://publications.europa.eu/resource/authority/language/ENG
+      label:
+        en: English
+        de: Englisch
+    - value: http://publications.europa.eu/resource/authority/language/DEU
+      label:
+        en: German
+        de: Deutsch
+
+- field_name: landing_page
+  display_property: dcat:landingPage
+  label:
+    en: Landing Page
+    de: Einstiegsseite
+  help_text:
+    en: URL of a web page with detailed information about the dataset.
+    de: URL einer Webseite mit detaillierten Informationen zum Datensatz.
+
+- field_name: page
+  display_property: foaf:page
+  label:
+    en: Documentation Page
+    de: Dokumentationsseite
+  help_text:
+    en: URL of a documentation page or explanatory document about the dataset.
+    de: URL einer Dokumentationsseite oder eines erklärenden Dokuments zum Datensatz.
+
+- field_name: is_referenced_by
+  display_property: dcterms:isReferencedBy
+  label:
+    en: Is referenced by
+    de: Wird referenziert von
+  help_text:
+    en: References to other resources that cite or use this dataset.
+    de: Verweise auf andere Ressourcen, die diesen Datensatz zitieren oder verwenden.
+  preset: multiple_text
+
+- field_name: applicable_legislation
+  display_property: dcatap:applicableLegislation
+  label:
+    en: Applicable legislation
+    de: Anwendbare Gesetzgebung
+  help_text:
+    en: Legal foundations or regulations relevant to this dataset.
+    de: Gesetzliche Grundlagen oder Vorschriften, die für diesen Datensatz relevant sind.
+
+- field_name: dataset_type
+  display_property: dcterms:type
+  label:
+    en: Type
+    de: Typ
+  help_text:
+    en: The type of dataset (e.g., statistics, geodata, text).
+    de: Die Art des Datensatzes (z.B. Statistik, Geodaten, Text).
+  preset: select
+  choices:
+    - label:
+        en: Statistical
+        de: "Statistische Daten"
+      value: http://publications.europa.eu/resource/authority/dataset-type/STATISTICAL
+    - label:
+        en: Geospatial
+        de: Geodaten
+      value: http://publications.europa.eu/resource/authority/dataset-type/GEOSPATIAL
+    - label:
+        en: Textual
+        de: Text
+      value: http://publications.europa.eu/resource/authority/dataset-type/TEXTUAL
+    - label:
+        en: Code List
+        de: Codeliste
+      value: http://publications.europa.eu/resource/authority/dataset-type/CODE_LIST
+
+- field_name: relation
+  display_property: dcterms:relation
+  label:
+    en: Related resource
+    de: Verwandte Ressource
+  help_text:
+    en: A related resource.
+    de: Eine verwandte Ressource.
+
+- field_name: was_generated_by
+  display_property: prov:wasGeneratedBy
+  label:
+    en: Was generated by
+    de: Wurde generiert durch
+  help_text:
+    en: An activity that generated, or provided the business context for the creation of, this dataset.
+    de: Eine Aktivität, die diesen Datensatz generiert oder den geschäftlichen Kontext für dessen Erstellung geliefert hat.
+
+- field_name: qualified_attribution
+  display_property: prov:qualifiedAttribution
+  label:
+    en: Qualified attribution
+    de: Qualifizierte Zuschreibung
+  help_text:
+    en: Link to an Agent having some form of responsibility for the resource.
+    de: Verweis auf einen Agenten, der in irgendeiner Form für die Ressource verantwortlich ist.
+
+- field_name: qualified_relation
+  display_property: dcat:qualifiedRelation
+  label:
+    en: Qualified relation
+    de: Qualifizierte Beziehung
+  help_text:
+    en: Link to a description of a relationship with another resource.
+    de: Verweis auf die Beschreibung einer Beziehung zu einer anderen Ressource.
+
+- field_name: references
+  display_property: dcterms:references
+  label:
+    en: References
+    de: Referenzen
+  help_text:
+    en: Related resource that is referenced, cited, or otherwise pointed to by the described resource.
+    de: Verwandte Ressource, auf die von der beschriebenen Ressource verwiesen, zitiert oder anderweitig hingewiesen wird.
+  preset: multiple_text
+
+- field_name: source
+  display_property: dcterms:source
+  label:
+    en: Source
+    de: Quelle
+  help_text:
+    en: A related resource from which the described resource is derived.
+    de: Eine verwandte Ressource, von der die beschriebene Ressource abgeleitet ist.
+
+- field_name: has_version
+  display_property: dcat:hasVersion
+  label:
+    en: Has version
+    de: Hat Version
+  help_text:
+    en: A related dataset that is a version, edition, or adaptation of the described dataset.
+    de: Ein verwandter Datensatz, der eine Version, Edition oder Anpassung des beschriebenen Datensatzes ist.
+
+- field_name: has_version_dcterms
+  display_property: dcterms:hasVersion
+  label:
+    en: Has version (dcterms)
+    de: Hat Version (dcterms)
+  help_text:
+    en: A related resource that is a version, edition, or adaptation of the described resource.
+    de: Eine verwandte Ressource, die eine Version, Edition oder Anpassung der beschriebenen Ressource ist.
+
+- field_name: is_version_of
+  display_property: dcterms:isVersionOf
+  label:
+    en: Is version of
+    de: Ist Version von
+  help_text:
+    en: A related resource of which the described resource is a version, edition, or adaptation.
+    de: Eine verwandte Ressource, von der die beschriebene Ressource eine Version, Edition oder Anpassung ist.
+
+- field_name: sample
+  display_property: adms:sample
+  label:
+    en: Sample
+    de: Beispiel
+  help_text:
+    en: A sample distribution of the dataset.
+    de: Eine Beispielverteilung des Datensatzes.
+
+- field_name: creator
+  display_property: dcterms:creator
+  label:
+    en: Creator
+    de: Ersteller
+  help_text:
+    en: An entity primarily responsible for making the resource.
+    de: Eine Entität, die hauptsächlich für die Erstellung der Ressource verantwortlich ist.
+  repeating_label: Creator 
+  repeating_subfields:
+
+    - field_name: uri
+      label: URI
+
+    - field_name: name
+      label: Name
+
+    - field_name: url
+      label: URL
+
+    - field_name: type
+      label: Type
+
+    - field_name: identifier
+      label: Identifier
+
+    - field_name: email
+      label: Email
+      display_snippet: email.html
+
+
+- field_name: contributor
+  display_property: dcterms:contributor
+  label:
+    en: Contributor
+    de: Mitwirkender
+  help_text:
+    en: An entity responsible for making contributions to the resource.
+    de: Eine Entität, die für Beiträge zur Ressource verantwortlich ist.
+
+- field_name: originator
+  display_property: dcatde:originator
+  label:
+    en: Originator
+    de: Urheber
+  help_text:
+    en: An entity responsible for the creation of the original resource from which the dataset was derived.
+    de: Eine Entität, die für die Erstellung der ursprünglichen Ressource verantwortlich ist, von der der Datensatz abgeleitet wurde.
+
+- field_name: maintainer
+  display_property: dcatde:maintainer
+  label:
+    en: Maintainer
+    de: Betreuer
+  help_text:
+    en: An entity responsible for maintaining the resource.
+    de: Eine Entität, die für die Pflege der Ressource verantwortlich ist.
+
+- field_name: in_series
+  display_property: dcat:inSeries
+  label:
+    en: In series
+    de: In Reihe
+  help_text:
+    en: Indicates that the Dataset is part of a series.
+    de: Gibt an, dass der Datensatz Teil einer Serie ist.
+
+- field_name: version_info
+  display_property: owl:versionInfo
+  label:
+    en: Version info
+    de: Versionsinformation
+  help_text:
+    en: A string describing the version of the Dataset.
+    de: Eine Zeichenfolge, die die Version des Datensatzes beschreibt.
+
+resource_fields:
+
+- field_name: url
+  label: URL
+  preset: resource_url_upload
+  help_text:
+    en: URL for direct access to the resource or for download.
+    de: URL zum direkten Zugriff auf die Ressource oder zum Download.
+
+- field_name: name
+  label: Name
+  form_placeholder: eg. January 2011 Gold Prices
+  help_text:
+    en: A short, descriptive name for the resource.
+    de: Ein kurzer, beschreibender Name für die Ressource.
+
+- field_name: description
+  form_snippet: markdown.html
+  label:
+    en: Description
+    de: Beschreibung
+  help_text:
+    en: A detailed description of the resource and its contents.
+    de: Eine ausführliche Beschreibung der Ressource und ihres Inhalts.
+
+- field_name: format
+  label: Format
+  preset: resource_format_autocomplete
+  help_text:
+    en: The file format or MIME type of the resource.
+    de: Das Dateiformat oder der MIME-Typ der Ressource.
+
+- field_name: rights
+  form_snippet: markdown.html
+  label:
+    en: Rights
+    de: Rechte
+  help_text:
+    en: Information about rights and licenses specific to this resource.
+    de: Informationen zu Rechten und Lizenzen, die speziell für diese Ressource gelten.
+
+- field_name: status
+  label: Status
+  help_text:
+    en: The current status of the resource in its lifecycle (e.g., completed, under development).
+    de: Der aktuelle Status der Ressource im Lebenszyklus (z.B. fertiggestellt, in Entwicklung).
+  preset: select
+  choices:
+    - label:
+        en: Completed
+        de: Abgeschlossen
+      value: http://purl.org/adms/status/Completed
+    - label:
+        en: Deprecated
+        de: Abgelaufen
+      value: http://purl.org/adms/status/Deprecated
+    - label:
+        en: Under Development
+        de: In Entwicklung
+      value: http://purl.org/adms/status/UnderDevelopment
+    - label:
+        en: Withdrawn
+        de: Zurückgezogen
+      value: http://purl.org/adms/status/Withdrawn
+
+- field_name: issued
+  preset: datetime
+  label:
+    en: Release date
+    de: Veröffentlichungsdatum
+  help_text:
+    en: The date of first publication of this resource.
+    de: Das Datum der ersten Veröffentlichung dieser Ressource.
+
+- field_name: modified
+  preset: datetime
+  label:
+    en: Modification date
+    de: Änderungsdatum
+  help_text:
+    en: The date of the last change or update to this resource.
+    de: Das Datum der letzten Änderung oder Aktualisierung dieser Ressource.
+
+- field_name: language
+  display_property: dcterms:language
+  preset: multiple_select
+  label:
+    en: Language
+    de: Sprache
+  help_text:
+    en: The language(s) in which the resource is available.
+    de: Die Sprache(n), in der/denen die Ressource verfügbar ist.
+  choices:
+    - value: http://publications.europa.eu/resource/authority/language/ENG
+      label:
+        en: English
+        de: Englisch
+    - value: http://publications.europa.eu/resource/authority/language/DEU
+      label:
+        en: German
+        de: Deutsch
+
+- field_name: documentation
+  label:
+    en: Documentation
+    de: Dokumentation
+  help_text:
+    en: Link to additional documentation or explanations about the resource.
+    de: Link zu zusätzlicher Dokumentation oder Erläuterungen zur Ressource.
+  preset: markdown
+
+- field_name: conforms_to
+  display_property: dcterms:conformsTo
+  label:
+    en: Conforms to
+    de: Konform zu
+  help_text:
+    en: Standards or specifications to which the resource conforms.
+    de: Standards oder Spezifikationen, denen die Ressource entspricht.
+  preset: multiple_text
+
+- field_name: applicable_legislation
+  display_property: dcatap:applicableLegislation
+  label:
+    en: Applicable legislation
+    de: Anwendbare Gesetzgebung
+  help_text:
+    en: Legal foundations or regulations specifically relevant to this resource.
+    de: Gesetzliche Grundlagen oder Vorschriften, die speziell für diese Ressource relevant sind.
+  preset: markdown
+
+- field_name: access_service
+  display_property: dcat:accessService
+  label: Access services
+  repeating_label: Access service
+  repeating_subfields:
+
+    - field_name: uri
+      label: URI
+
+    - field_name: title
+      label: Title
+
+    - field_name: endpoint_description
+      label: Endpoint description
+
+    - field_name: endpoint_url
+      label: Endpoint URL
+
+    - field_name: serves_dataset
+      label: Serves dataset
+
+  help_text: A data service that gives access to the resource.
